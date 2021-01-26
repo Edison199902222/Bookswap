@@ -1,0 +1,10 @@
+
+用deque 维护 递增或者递减的一个queue
+deque中 可以储存 index， 也可以储存值
+
+模版一般
+        for right xxx：
+            if 来判断deque 最大值 是否过期
+            while 来维护 递增 或者递减 的deque
+            把 当前值 放进deque中
+            if  判断 是否需要放东西进result

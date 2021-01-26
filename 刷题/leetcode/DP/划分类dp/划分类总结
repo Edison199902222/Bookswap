@@ -1,0 +1,10 @@
+
+划分类dp 跟 区间类dp区别是，划分类dp中间可以不是连续的，有贪心的思想
+划分类dp 必须以xx为结尾，所以贪心可以work
+区间类dp 必须要连续
+
+划分类明显特征是subarray
+
+# 找出每个区间的 local_max/ local_min 然后用当前值减去local 就可以去更新global
+# 也可以用kadane's algorithm， kadane's algorithm 类似于dp，每次都考虑当前点作为新起点
+# kadane's algorithm 初始化需要初始为第一个数字，每次都考虑当前点作为新起点
