@@ -38,6 +38,7 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Use the onCreate method of its parent class Activity to do the drawing of the interface.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oaccepted_swap);
 
@@ -54,21 +55,24 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
         comment = (TextView) findViewById(R.id.comment_text);
         confirm = (Button) findViewById(R.id.confirm);
         locationBut = (Button) findViewById(R.id.locationButton);
-
+        // jump new page
         Intent intent = getIntent();
 //        Log.d("viewbook",)
         swapingBook = intent.getParcelableExtra("book");
+        // log
         Log.d("viewbook2",swapingBook.getUnikey());
         String infoDisplay = swapingBook.getTitle() + " by " + swapingBook.getAuthor();
         infoDisplay = infoDisplay.substring(0, Math.min(infoDisplay.length(), 40));
         TextPaint tp = bookinfo.getPaint();
         tp.setFakeBoldText(true);
         bookinfo.setText(infoDisplay);
-
+        // show book information page
         bookinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // jump to new page
                 Intent intent = new Intent(OAcceptedSwapActivity.this, ViewBookActivity.class);
+                // current book information
                 intent.putExtra("book", swapingBook);
                 startActivity(intent);
             }
@@ -87,7 +91,7 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
             }
         });
 
-
+        // detect confirm button
         confirm.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -100,7 +104,7 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
         });
 
 
-
+        // detect location button
         locationBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,10 +128,13 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
      * 怎么做swap的
      */
     public void timer(){
+        // multithreading
         handler = new Handler();
+        // sub thread
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                // if both are true
                 u.checkSwapStatus(swapingBook, new DataBaseUtil.swapStatus() {
                     @Override
                     public void getStatus(boolean value) {
@@ -141,7 +148,7 @@ public class OAcceptedSwapActivity extends AppCompatActivity {
                     }
                 });
 
-
+                // check per second
                 handler.postDelayed(this,1000);}
         }, 1000);  //the time is in miliseconds
 

@@ -28,6 +28,7 @@ public class OAcceptedAdapter extends ArrayAdapter<Book> {
         //this.book = book;
     }
     @Override
+    // ArrayAdapter<Book> get view
     public View getView(final int position, View convertView, ViewGroup parent) {
         OAcceptedAdapter.ViewHolder holder = null;
         if (convertView == null) { // check if given view is null, if it is we inflate
@@ -47,6 +48,7 @@ public class OAcceptedAdapter extends ArrayAdapter<Book> {
 
         holder.title.setText("Title: "+(String)element.getTitle());
         holder.author.setText("Author: "+(String)element.getAuthor());
+        // jump to new page
         holder.button_swap.setOnClickListener(new View.OnClickListener() {
             //when click the button will jump to the new activity that show all the user request for this book
             /**
@@ -60,6 +62,7 @@ public class OAcceptedAdapter extends ArrayAdapter<Book> {
                 goSwap.putExtra("book",element);
 
                 Log.d("viewbook1",element.getUnikey());
+                // jump to new page
                 getContext().startActivity(goSwap);
             }
         });
