@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+当题目要求在矩阵找到submatrix 的时候， 就能想到使用这种方法
+先把matrix presum
+然后 for left in range(col):
+        for right in range(left, col):
+            for bottom in range(row):
+
+     这个套路可以遍历所有可能的矩阵

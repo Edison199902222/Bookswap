@@ -1,0 +1,15 @@
+
+
+
+用来解决dijk 解决不了的问题，当图中有负权重的情况
+本质上是dp
+ # 意思是，从起点 到 第i个点的最短路径的cost 是多少
+        record = [float("inf") for i in range(N)]
+        record[K - 1] = 0
+        # 循环次数的含义：循环N次后，表示不超过N条边的最短距离
+        # N 如果等于所有点的话，说明全部都可以走，因为一个点到另一个点的边数，最多可以走N - 1 条边
+        for i in range(N):
+            # 每个edge 都走一次
+            for e in times:
+                # 每个点更新，状态转移
+                record[e[1] - 1] = min(record[e[1] - 1], record[e[0] - 1] + e[2])

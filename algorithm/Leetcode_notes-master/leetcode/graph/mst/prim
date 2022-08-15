@@ -1,0 +1,53 @@
+
+
+
+
+
+prim 算法和 dijk 很像，都是用 heap 来实现
+用来算生成最小树的cost
+思路： 建立图，图里面是点 对 （cost and 点） 表示 当前点i 去 点j 建立一条边所需要的cost
+然后随意选一个初始的点，把它可能去的点 放进heap 中，并且建立一个visited 的set，表示去过的点
+放入heap后，选取cost 最小的的边并且这条边所到达的点没有去过，result 加上当前cost，并且把新node 可以去的点的边 放进heap中
+
+class Solution(object):
+    def minCostConnectPoints(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        graph = collections.defaultdict(list)
+        n = len(points)
+        # 建立图
+        for i in range(n):
+            for j in range(i + 1, n):
+                cost = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1])
+                graph[i].append((cost, j))
+                graph[j].append((cost, i))
+        result = 0
+        # 建立set 表示去过的点
+        visited = set()
+        heap = []
+        # 把初始的点可以去的点放进heap中
+        for i in graph[0]:
+            heapq.heappush(heap, i)
+        visited.add(0)
+        while heap:
+            # 拿出当前cost 最小的 点
+            cost, node = heapq.heappop(heap)
+            # 如果没有去过
+            if node in visited:
+                continue
+            # 放进visited 中，表示去过
+            visited.add(node)
+            result += cost
+            # 把新node 能去的点也放进heap中
+            for next_node in graph[node]:
+                if next_node[1] not in visited:
+                    heapq.heappush(heap, next_node)
+            # 如果所有的点都可以去了，提前返回
+            if len(visited) == n:
+                break
+        return result
+
+时间复杂度 ElogV
+
